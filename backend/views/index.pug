@@ -1,0 +1,10 @@
+doctype html
+html(lang="en")
+    head
+        - if(assetExist('main.css'))
+            link(rel="stylesheet", type="text/css", href=asset('main.css'))
+    body
+        #app
+        - if(assetExist('main.js'))
+            script(src=asset('main.js'))
+    
