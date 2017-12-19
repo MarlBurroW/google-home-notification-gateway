@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development NODE_PORT=3020 WEBPACKDEVSERVER_PORT=3010 BROWSERSYNC_PORT=3000 concurrently  \"nodemon --watch backend start.js\" \"node start-devserver.js\"",
+    "dev": "cross-env NODE_ENV=development NODE_PORT=3020 WEBPACKDEVSERVER_PORT=3010 BROWSERSYNC_PORT=3000 node start-dev.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "cross-env NODE_ENV=production NODE_PORT=3000 node start.js"
+    "start": "cross-env NODE_ENV=production NODE_PORT=3000 webpack && node start.js"
   },
   "author": "Nicolas VARROT (MarlburroW)",
   "license": "ISC",
@@ -16,7 +16,9 @@
     "babel-loader": "^7.1.2",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
+    "chalk": "^2.3.0",
     "clean-webpack-plugin": "^0.1.17",
+    "colors": "^1.1.2",
     "concurrently": "^3.5.1",
     "cross-env": "^5.1.1",
     "css-loader": "^0.28.7",

@@ -13,7 +13,7 @@ module.exports = {
 }
 
 function assetExist (file) {
-  return manifest[file] ? true : false
+  return manifest[file] ? true
 }
 
 function asset (file) {
