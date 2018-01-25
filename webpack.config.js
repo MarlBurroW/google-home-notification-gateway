@@ -10,14 +10,13 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 // Get the env
 const dev = process.env.NODE_ENV !== 'production'
 
-// BEGIN CHANGE ME ========== 
-
+// BEGIN CHANGE ME ==========
 
 // Port of the webpack dev server
 const WebpackDevServerPort = process.env.WEBPACKDEVSERVER_PORT || 3010
 
 // Port of the BrowserSync server
-const browserSyncPort = process.env.BROWSERSYNC_PORT || 3020
+const browserSyncPort = process.env.BROWSERSYNC_PORT || 3000
 
 // END CHANGE ME ==========
 
@@ -68,8 +67,6 @@ let cssLoaders = [
 
 let scssLoaders = [...cssLoaders, 'sass-loader']
 let sassLoaders = [...cssLoaders, 'sass-loader?indentedSyntax']
-
-
 
 let config = {
 
@@ -136,17 +133,25 @@ let config = {
       {
         test: /\.sass$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: sassLoaders,
-          publicPath: "../"
+          publicPath: '../'
+        })
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: cssLoaders,
+          publicPath: '../'
         })
       },
       {
         test: /\.scss$/,
         use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: scssLoaders,
-          publicPath: "../"
+          publicPath: '../'
         })
       },
       {
@@ -201,12 +206,10 @@ let config = {
 
     new CleanWebpackPlugin(pathsToClean, {
       root: path.resolve('./'),
-      verbose: true,
+      verbose: false,
       dry: false,
       minify: {}
     })
-
-
   ]
 }
 
@@ -214,26 +217,21 @@ if (!dev) {
   config.plugins.push(new UglifyJSPlugin({
     sourceMap: true
   }))
-
-
 }
 
-if(dev) {
+if (dev) {
   config.entry.push(`webpack-dev-server/client?http://localhost:${WebpackDevServerPort}`)
   config.entry.push('webpack/hot/only-dev-server')
-  
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
   config.plugins.push(new BrowserSyncPlugin({
     host: 'localhost',
+    logLevel: 'silent',
     port: browserSyncPort,
     proxy: `http://localhost:${WebpackDevServerPort}/`,
     open: false
-    
   }, {
     reload: false
   }))
 }
-
-
 
 module.exports = config

@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import VueRouter from 'vue-router'
+import 'vuetify/dist/vuetify.min.css'
 
 // Core
 import App from './vue/App.vue'
@@ -11,22 +12,18 @@ import store from './store.js'
 import Login from './vue/screens/Login.vue'
 
 // Components
+Vue.component('login', Login)
 
 // Plugins
 Vue.use(VueRouter)
 Vue.use(Vuetify)
 
 // Routes
-const routes = [
-  { path: '/login', name: 'login', component: Login }
-]
+const routes = []
 
 const router = new VueRouter({
   routes
 })
-
-// Starting page
-router.replace({name: 'login'})
 
 // eslint-disable-next-line no-new
 new Vue({
