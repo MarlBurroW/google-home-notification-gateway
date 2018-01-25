@@ -50,6 +50,8 @@
     "axios": "^0.17.1",
     "lodash": "^4.17.4",
     "pug": "^2.0.0-rc.4",
+    "sequelize": "^4.32.1",
+    "sqlite3": "^3.1.13",
     "vue": "^2.5.11",
     "vue-router": "^3.0.1",
     "vuetify": "^v1.0.0-alpha.3",

@@ -25,7 +25,7 @@ var devServer = new webpackDevServer(compiler, {
     errors: true
   },
   proxy: {
-    "/": {
+    '/': {
       target: `http://localhost:${port}`,
       changeOrigin: true,
       secure: false
