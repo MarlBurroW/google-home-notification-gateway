@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: `./backend/storage/database.sqlite`
 })

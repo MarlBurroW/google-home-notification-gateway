@@ -1,19 +1,15 @@
 const database = require('../database')
 const Sequelize = require('sequelize')
 
-const Device = database.define('devices', {
-   
-    identifier: {
-        type: Sequelize.STRING,
+const ApiKey = database.define('api_keys', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
         allowNull: false,
-        unique: true,
-        validate: {
-            is: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
-            notEmpty: true,  
-        }
+        unique: true
     },
-    name: {
+    app_name: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: false,
@@ -21,18 +17,16 @@ const Device = database.define('devices', {
             notEmpty: true,  
         }
     },
-    
-    ip_address: {
+    token: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        unique: false,
         validate: {
-            isIPv4: true,
-            notEmpty: true, 
+            notEmpty: true,  
         }
     }
 })
 
-Device.sync()
+ApiKey.sync()
 
-module.exports = Device
+module.exports = ApiKey
