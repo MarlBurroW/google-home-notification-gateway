@@ -50,6 +50,8 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "google-home-notifier": "^1.2.0",
+    "jsonwebtoken": "^8.1.1",
     "localtunnel": "^1.8.3",
     "lodash": "^4.17.4",
     "pug": "^2.0.0-rc.4",
