@@ -9,7 +9,6 @@ if (fs.existsSync(secretFilePath)) {
 } else {
   secret = helpers.generateToken(64)
   fs.writeFileSync(secretFilePath, secret, 'utf8')
-
 }
 
 module.exports = {

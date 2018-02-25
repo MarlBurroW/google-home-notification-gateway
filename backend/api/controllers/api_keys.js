@@ -50,7 +50,7 @@ module.exports = {
             message: 'Api key not found'
           })
         } else {
-          res.json(apiKey, 200)
+          res.json(apiKey)
         }
       }).catch(next)
     })
@@ -68,7 +68,7 @@ module.exports = {
           apiKey.destroy().then(() => {
             res.json({
               message: 'Api key deleted'
-            }, 200)
+            })
           }).catch(next)
         }
       }).catch(next)

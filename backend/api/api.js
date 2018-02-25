@@ -8,6 +8,7 @@ const devicesController = require('./controllers/devices')
 const apiKeysController = require('./controllers/api_keys')
 const adminTokensController = require('./controllers/admin_tokens')
 const notificationsController = require('./controllers/notifications')
+const localtunnelController = require('./controllers/localtunnel')
 
 module.exports = {
   create (app) {
@@ -17,6 +18,8 @@ module.exports = {
     apiKeysController.create(ApiRouter)
     notificationsController.create(ApiRouter)
     adminTokensController.create(ApiRouter)
+    localtunnelController.create(ApiRouter)
+    
     ApiRouter.use(errorHandler)
   }
 }

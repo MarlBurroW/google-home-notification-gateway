@@ -11,7 +11,11 @@ function generateToken (length) {
   return b.join('')
 }
 
+function getApplicationPort () {
+  return process.env.NODE_PORT || 3020
+}
 
 module.exports = {
-  generateToken
+  generateToken,
+  getApplicationPort
 }

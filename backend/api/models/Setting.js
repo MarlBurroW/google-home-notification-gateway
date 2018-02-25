@@ -27,8 +27,14 @@ Setting.sync().then(() => {
         identifier: 'admin-password',
         value: '!adminpassword!'
       })
+
+      Setting.create({
+        identifier: 'localtunnel-domain',
+        value: 'googlenotificationcenter'
+      })
     }
   })
 })
 
 module.exports = Setting
+

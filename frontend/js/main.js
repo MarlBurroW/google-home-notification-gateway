@@ -6,7 +6,7 @@ import 'vuetify/dist/vuetify.min.css'
 
 // Core
 import App from './vue/App.vue'
-import store from './store.js'
+import store from './store/store.js'
 
 // Screens
 import Login from './vue/screens/Login.vue'
