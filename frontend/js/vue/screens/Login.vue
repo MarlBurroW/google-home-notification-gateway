@@ -10,12 +10,14 @@
               label="Admin password"
               v-model="password"
               required
+              type="password"
+              :loading="waiting.login"
               ></v-text-field>
                     
             </v-card-text>
             <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="login(password)" round color="primary" >Login</v-btn>
+            <v-btn :loading="waiting.login" @click="login(password)" round color="primary" >Login</v-btn>
             <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
@@ -28,20 +30,16 @@ import {mapGetters, mapActions} from 'vuex'
 
 export default {
   name: 'login',
-  watch: {
-    loggedIn (newVal, oldVal) {
-      this.loginDialog = !newVal
-    }
-  },
   data () {
     return {
       loginDialog: true,
-      password: null
+      password: '!adminpassword!'
     }
   },
   computed: {
     ...mapGetters('global', [
-      'loggedIn'
+      'loggedIn',
+      'waiting'
     ])
   },
   methods: {

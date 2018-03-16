@@ -1,7 +1,5 @@
-
-
 function generateToken (length) {
-  //edit the token allowed characters
+  // edit the token allowed characters
   let a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.split('')
   let b = [];
   for (let i = 0; i < length; i++) {

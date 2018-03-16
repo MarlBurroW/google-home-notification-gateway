@@ -2,10 +2,13 @@ const database = require('../database')
 const Sequelize = require('sequelize')
 
 const Device = database.define('devices', {
-
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   identifier: {
     type: Sequelize.STRING,
-    primaryKey: true,
     allowNull: false,
     unique: true,
     validate: {
@@ -29,6 +32,15 @@ const Device = database.define('devices', {
     validate: {
       isIPv4: true,
       notEmpty: true
+    }
+  },
+  model: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: false,
+    validate: {
+      notEmpty: true,
+      isIn: [['google-home', 'google-home-mini', 'google-home-copper', 'google-home-coral', 'google-home-carbon', 'google-home-mini-coral', 'google-home-mini-charcoal', 'chromecast-audio']]
     }
   }
 })

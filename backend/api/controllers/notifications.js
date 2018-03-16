@@ -1,19 +1,24 @@
 const _ = require('lodash')
 const helpers = require('../../helpers/helpers')
 const ghnotifier = require('google-home-notifier')
-
+const notifier = require('../../services/notifier')
 const Device = require('../models/Device')
 const apiKeyAuth = require('../middlewares/apiKeyAuth')
+const apiKeyAuthOrAdminAuth = require('../middlewares/apiKeyAuthOrAdminAuth')
 
 module.exports = {
   create (ApiRouter) {
-    ApiRouter.post('/devices/notification', apiKeyAuth, (req, res, next) => {
-      const notificationFields = _.pick(req.body, ['language', 'text'])
+    ApiRouter.post('/devices/notifications', apiKeyAuthOrAdminAuth, (req, res, next) => {
+      const notificationFields = _.pick(req.body, ['lang', 'text'])
+      const options = {}
+
+      if (notificationFields.lang) {
+        options.lang = notificationFields.lang
+      }
+
       Device.findAll().then((devices) => {
         devices.forEach(device => {
-          ghnotifier.device(device.name, notificationFields.language);
-          ghnotifier.ip(device.ip_address)
-          ghnotifier.notify(notificationFields.text, () => {})
+          notifier.speak(device, notificationFields.text, options)
         })
         res.json({
           message: 'Notification sent'
@@ -21,9 +26,14 @@ module.exports = {
       }).catch(next)
     })
 
-    ApiRouter.post('/devices/:device_identifier/notification', apiKeyAuth, (req, res, next) => {
-      const notificationFields = _.pick(req.body, ['language', 'text'])
+    ApiRouter.post('/devices/:device_identifier/notifications', apiKeyAuthOrAdminAuth, (req, res, next) => {
+      const notificationFields = _.pick(req.body, ['lang', 'text'])
       const deviceID = req.params.device_identifier
+      const options = {}
+
+      if (notificationFields.lang) {
+        options.lang = notificationFields.lang
+      }
 
       Device.findById(deviceID).then((device) => {
         if (!device) {
@@ -32,12 +42,11 @@ module.exports = {
             message: 'Device not found'
           })
         } else {
-          ghnotifier.device(device.name, notificationFields.language);
-          ghnotifier.ip(device.ip_address)
-          ghnotifier.notify(notificationFields.text, () => {})
-          res.json({
-            message: 'Notification sent'
-          }, 200)
+          notifier.speak(device, notificationFields.text, options).then(() => {
+            res.json({
+              message: 'Notification sent'
+            }, 200)
+          }).catch(next)
         }
       }).catch(next)
     })

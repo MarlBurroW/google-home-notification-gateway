@@ -1,5 +1,6 @@
 const database = require('../database')
 const Sequelize = require('sequelize')
+const password = require('../../services/password')
 
 const Setting = database.define('settings', {
 
@@ -23,11 +24,16 @@ const Setting = database.define('settings', {
 Setting.sync().then(() => {
   Setting.findById('admin-password').then((setting) => {
     if (!setting) {
-      Setting.create({
-        identifier: 'admin-password',
-        value: '!adminpassword!'
+      password.hash('!adminpassword!').then((hash) => {
+        Setting.create({
+          identifier: 'admin-password',
+          value: hash
+        })
       })
-
+      Setting.create({
+        identifier: 'default-language',
+        value: 'en-US'
+      })
       Setting.create({
         identifier: 'localtunnel-domain',
         value: 'googlenotificationcenter'

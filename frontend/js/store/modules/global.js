@@ -1,4 +1,5 @@
 import API from '../../services/api'
+import Promise from 'bluebird'
 
 const globalModule = {
   namespaced: true,
@@ -29,6 +30,7 @@ const globalModule = {
     logout (context) {
       context.commit('STORE_LOGIN_STATUS', false)
       API.removeAdminToken()
+      // TODO Clear state of all module
     },
     login (context, password) {
       context.commit('STORE_WAITING_STATUS', {type: 'login', status: true})
@@ -37,14 +39,22 @@ const globalModule = {
         API.events.on('wrongToken', () => {
           return context.dispatch('logout')
         })
-        context.commit('STORE_LOGIN_STATUS', true)
-        return context.dispatch('getInitialData')
+        return context.dispatch('getInitialData').then(() => {
+          context.commit('STORE_LOGIN_STATUS', true)
+        })
       }).finally(() => {
         context.commit('STORE_WAITING_STATUS', {type: 'login', status: false})
       })
     },
     getInitialData (context) {
-      return context.dispatch('devices/getDevices', null, {root: true})
+      return Promise.all([
+        context.dispatch('devices/getDevices', null, {root: true}),
+        context.dispatch('apiKeys/getApiKeys', null, {root: true}),
+        context.dispatch('localtunnel/getLocaltunnel', null, {root: true}),
+        context.dispatch('settings/getSettings', null, {root: true})
+      ]).finally(() => {
+
+      })
     }
   },
   getters: {

@@ -29,9 +29,13 @@ if (debug === true) {
   })
 }
 
+// When mockDelay is true, the API simulate a response delay to test UI
+const mockDelay = false
+const mockDelayMax = 3000
+
 // Handler for all responses
 function processResponse (response) {
-  return new Promise((resolve, reject) => {
+  let promise = new Promise((resolve, reject) => {
     if (response.ok === false) {
       console.error(response.problem)
 
@@ -48,6 +52,16 @@ function processResponse (response) {
       }
     }
   })
+
+  if (mockDelay) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(promise)
+      }, Math.floor(Math.random() * mockDelayMax))
+    })
+  } else {
+    return promise
+  }
 }
 
 let adminToken = null
@@ -59,6 +73,25 @@ function setAdminToken (token) {
 function removeAdminToken () {
   adminToken = null
   eventEmitter.removeAllListeners('wrongToken')
+}
+
+let latestMap = {}
+
+function takeLatest (type, promise) {
+  latestMap[type] = promise
+  return new Promise((resolve, reject) => {
+    promise.then((result) => {
+      if (promise === latestMap[type]) {
+        latestMap[type] = null
+        resolve(result)
+      }
+    }).catch((result) => {
+      if (promise === latestMap[type]) {
+        latestMap[type] = null
+        resolve(result)
+      }
+    })
+  })
 }
 
 APISauceInstance.addRequestTransform((request) => {
@@ -73,7 +106,18 @@ const APIMethods = {
   // Application related methods
   getAdminToken: (password) => APISauceInstance.post('/admin_tokens', {password}).then(processResponse),
   getDevices: () => APISauceInstance.get('/devices').then(processResponse),
-  setAdminToken
+  getApiKeys: () => APISauceInstance.get('/apikeys').then(processResponse),
+  updateApiKey: (apiKey) => APISauceInstance.put(`/apikeys/${apiKey.id}`, apiKey).then(processResponse),
+  createApiKey: (apiKey) => APISauceInstance.post(`/apikeys`, apiKey).then(processResponse),
+  removeApiKey: (apiKey) => APISauceInstance.delete(`/apikeys/${apiKey.id}`).then(processResponse),
+  getLocaltunnel: () => APISauceInstance.get('/localtunnel').then(processResponse),
+  updateDevice: (device) => APISauceInstance.put(`/devices/${device.id}`, device).then(processResponse),
+  createDevice: (device) => APISauceInstance.post(`/devices`, device).then(processResponse),
+  removeDevice: (device) => APISauceInstance.delete(`/devices/${device.id}`).then(processResponse),
+  sendNotification: (device, data) => APISauceInstance.post(`/devices/${device.id}/notifications`, data).then(processResponse),
+  checkHost: (ipAddress) => APISauceInstance.post(`/checkhost`, {ip_address: ipAddress}).then(processResponse),
+  getSettings: () => APISauceInstance.get('/settings').then(processResponse),
+  updateSettings: (settings) => APISauceInstance.put(`/settings`, settings).then(processResponse)
 }
 
 // Create an API with the Axios instance (because the axios instance is sometime needed from outside the module)
@@ -81,6 +125,7 @@ const API = {
   axios: APISauceInstance.axiosInstance,
   setAdminToken,
   removeAdminToken,
+  takeLatest,
   events: eventEmitter
 }
 

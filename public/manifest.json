@@ -1,3 +1,16 @@
 {
+  "fonts/materialdesignicons-webfont/materialdesignicons-webfont.eot": "/fonts/materialdesignicons-webfont/materialdesignicons-webfont.eot",
+  "fonts/materialdesignicons-webfont/materialdesignicons-webfont.ttf?v=2.1.99": "/fonts/materialdesignicons-webfont/materialdesignicons-webfont.ttf",
+  "fonts/materialdesignicons-webfont/materialdesignicons-webfont.woff2?v=2.1.99": "/fonts/materialdesignicons-webfont/materialdesignicons-webfont.woff2",
+  "fonts/materialdesignicons-webfont/materialdesignicons-webfont.woff?v=2.1.99": "/fonts/materialdesignicons-webfont/materialdesignicons-webfont.woff",
+  "images/materialdesignicons-webfont.svg?v=2.1.99": "/images/materialdesignicons-webfont.svg",
+  "images/model-chromecast-audio.png": "/images/model-chromecast-audio.png",
+  "images/model-google-home-carbon.png": "/images/model-google-home-carbon.png",
+  "images/model-google-home-copper.png": "/images/model-google-home-copper.png",
+  "images/model-google-home-coral.png": "/images/model-google-home-coral.png",
+  "images/model-google-home-mini-charcoal.png": "/images/model-google-home-mini-charcoal.png",
+  "images/model-google-home-mini-coral.png": "/images/model-google-home-mini-coral.png",
+  "images/model-google-home-mini.png": "/images/model-google-home-mini.png",
+  "images/model-google-home.png": "/images/model-google-home.png",
   "main.js": "/js/main.js"
 }
