@@ -56,7 +56,7 @@ export default {
     deviceToSendNotification (newVal, oldVal) {
       if (newVal) {
         this.lang = this.settings['default-language']
-        this.textToSpeak = 'it works!'
+        this.textToSpeak = 'It works!'
         this.open = true
       } else {
         this.open = false

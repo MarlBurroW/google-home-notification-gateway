@@ -38,6 +38,10 @@ Setting.sync().then(() => {
         identifier: 'localtunnel-domain',
         value: 'googlenotificationcenter'
       })
+      Setting.create({
+        identifier: 'generator-base-url',
+        value: null
+      })
     }
   })
 })

@@ -5,7 +5,7 @@ const Device = require('../models/Device')
 const adminAuth = require('../middlewares/adminAuth')
 
 module.exports = {
-  create(ApiRouter) {
+  create (ApiRouter) {
     ApiRouter.post('/devices', adminAuth, (req, res, next) => {
       const deviceFields = _.pick(req.body, ['name', 'identifier', 'ip_address', 'model'])
       Device.create(deviceFields).then((device) => {
@@ -13,7 +13,7 @@ module.exports = {
       }).catch(next)
     })
 
-    ApiRouter.put('/devices/:id', adminAuth, (req, res, next) => {
+    ApiRouter.put('/devices/:id([0-9]+)', adminAuth, (req, res, next) => {
       const deviceFields = _.pick(req.body, ['name', 'identifier', 'ip_address', 'model'])
       const deviceID = req.params.id
 
@@ -32,7 +32,7 @@ module.exports = {
       }).catch(next)
     })
 
-    ApiRouter.get('/devices/:id', adminAuth, (req, res, next) => {
+    ApiRouter.get('/devices/:id([0-9]+)', adminAuth, (req, res, next) => {
       const deviceID = req.params.id
 
       Device.findById(deviceID).then((device) => {
@@ -47,11 +47,10 @@ module.exports = {
       }).catch(next)
     })
 
-    ApiRouter.delete('/devices/:id', adminAuth, (req, res, next) => {
+    ApiRouter.delete('/devices/:id([0-9]+)', adminAuth, (req, res, next) => {
       const deviceID = req.params.id
 
       Device.findById(deviceID).then((device) => {
-
         if (!device) {
           next({
             status: 404,

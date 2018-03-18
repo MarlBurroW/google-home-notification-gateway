@@ -18,7 +18,7 @@ function start () {
   return new Promise(function (resolve, reject) {
 
     if (localtunnelInstance) {
-      reject('localtunnel already running')
+      reject(new Error('localtunnel already running'))
     } else {
       Setting.findOne({where: {
         identifier: 'localtunnel-domain'
@@ -29,10 +29,9 @@ function start () {
             reject(err)
           } else {
             localtunnelInstance = tunnel
-
             console.log('Localtunnel started: ', localtunnelInstance.url)
             localtunnelInstance.on('error', (err) => {
-              console.error('Localtunnel crashed')
+              console.error('Localtunnel crashed', err)
               console.log('Localtunnel restarting...')
               localtunnelInstance = null
               start()
@@ -48,7 +47,6 @@ function start () {
 function stop () {
   localtunnelInstance.close()
   localtunnelInstance = null
-
 }
 
 function getCurrentInstance () {
@@ -56,14 +54,14 @@ function getCurrentInstance () {
 }
 
 function getStatus () {
-  if(!localtunnelInstance) {
+  if (!localtunnelInstance) {
     return {
-      status: "stopped",
+      status: 'stopped',
       url: null
     }
   } else {
     return {
-      status: "running",
+      status: 'running',
       url: localtunnelInstance.url
     }
   }

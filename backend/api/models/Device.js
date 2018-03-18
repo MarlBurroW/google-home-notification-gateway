@@ -12,7 +12,7 @@ const Device = database.define('devices', {
     allowNull: false,
     unique: true,
     validate: {
-      is: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+      is: /^[a-z][a-z0-9]+(?:-[a-z0-9]+)*$/,
       notEmpty: true
     }
   },

@@ -105,19 +105,28 @@ APISauceInstance.addRequestTransform((request) => {
 const APIMethods = {
   // Application related methods
   getAdminToken: (password) => APISauceInstance.post('/admin_tokens', {password}).then(processResponse),
-  getDevices: () => APISauceInstance.get('/devices').then(processResponse),
+
   getApiKeys: () => APISauceInstance.get('/apikeys').then(processResponse),
   updateApiKey: (apiKey) => APISauceInstance.put(`/apikeys/${apiKey.id}`, apiKey).then(processResponse),
   createApiKey: (apiKey) => APISauceInstance.post(`/apikeys`, apiKey).then(processResponse),
   removeApiKey: (apiKey) => APISauceInstance.delete(`/apikeys/${apiKey.id}`).then(processResponse),
+
   getLocaltunnel: () => APISauceInstance.get('/localtunnel').then(processResponse),
+  stopLocaltunnel: () => APISauceInstance.delete('/localtunnel').then(processResponse),
+  startLocaltunnel: () => APISauceInstance.post('/localtunnel').then(processResponse),
+
+  getDevices: () => APISauceInstance.get('/devices').then(processResponse),
   updateDevice: (device) => APISauceInstance.put(`/devices/${device.id}`, device).then(processResponse),
   createDevice: (device) => APISauceInstance.post(`/devices`, device).then(processResponse),
   removeDevice: (device) => APISauceInstance.delete(`/devices/${device.id}`).then(processResponse),
-  sendNotification: (device, data) => APISauceInstance.post(`/devices/${device.id}/notifications`, data).then(processResponse),
-  checkHost: (ipAddress) => APISauceInstance.post(`/checkhost`, {ip_address: ipAddress}).then(processResponse),
+
   getSettings: () => APISauceInstance.get('/settings').then(processResponse),
-  updateSettings: (settings) => APISauceInstance.put(`/settings`, settings).then(processResponse)
+  updateSettings: (settings) => APISauceInstance.put(`/settings`, settings).then(processResponse),
+
+  sendNotification: (device, data) => APISauceInstance.post(`/devices/${device.id}/notifications`, data).then(processResponse),
+
+  checkHost: (ipAddress) => APISauceInstance.post(`/checkhost`, {ip_address: ipAddress}).then(processResponse)
+
 }
 
 // Create an API with the Axios instance (because the axios instance is sometime needed from outside the module)

@@ -11,7 +11,8 @@ module.exports = {
       const settingsFields = _.pick(req.body, [
         'admin-password',
         'localtunnel-domain',
-        'default-language'
+        'default-language',
+        'generator-base-url'
       ])
 
       let updatePromises =  []

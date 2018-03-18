@@ -1,10 +1,11 @@
 <template>
   <v-app dark>
     <v-layout >
-      <login v-if="!loggedIn"></login>
-      <layout v-if="loggedIn"></layout>
+      <v-fade-transition mode="out-in">
+        <login v-if="!loggedIn"></login>
+        <layout v-if="loggedIn"></layout>
+      </v-fade-transition>
     </v-layout>
-    
     <create-edit-device></create-edit-device>
     <create-edit-apikey></create-edit-apikey>
     <send-notification></send-notification>

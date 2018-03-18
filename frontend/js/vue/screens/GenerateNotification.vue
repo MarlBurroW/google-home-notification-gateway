@@ -9,10 +9,13 @@
     </v-layout>
     <v-scale-transition>
      <v-layout row wrap>
-        <v-flex  xs12>
+        <v-flex  xs12 md5>
           <v-card>
             <v-card-text>
-              
+              <h1>Compose the request</h1>
+              <v-alert v-if="errors.length > 0" type="error" :value="true" class="instructions-alert">
+                <div v-for="error in errors">• {{error}}</div>
+              </v-alert>
               <v-select
                 :items="devicesSelectItems"
                 v-model="device"
@@ -39,11 +42,33 @@
                 multi-line
                 no-resize
               ></v-text-field>
-            
+
+             
+             
+                        
             </v-card-text>
-            {{notificationUrl}}
+            
           </v-card>
         </v-flex>
+         <v-flex  xs12 md7>
+          <v-card>
+            <v-card-text>
+              <h1>How to send the request</h1>
+              <p v-if="method === 'get'">Call the url below with a simple <code color="success">GET</code> method to trigger the notification:</p>
+              <p v-if="method === 'post'">To trigger the notification with the <code color="success">POST</code> method, you have to call the below url with the <code>POST</code> method and add the <code>Content-Type</code> header with the value <code>application/json</code></p>
+          
+              <prism language="bash">{{notificationUrl}}</prism>
+              <p v-if="method === 'post'">All parameters must be located in the request body with the following JSON content:</p>
+              <prism v-if="method === 'post'" language="json">{{this.formattedJsonParameters}}</prism>
+             
+              <h2>Test with cURL</h2>
+              <p>You can test the notification with the following cURL command</p>
+              <prism language="bash">{{curlCommand}}</prism>
+
+
+            </v-card-text>
+          </v-card>
+         </v-flex>
       </v-layout>
     </v-scale-transition>
  </v-container>
@@ -66,16 +91,15 @@ export default {
       device: null,
       apiKey: null,
       languages: languageService.getLanguagesForSelect(),
-      baseUrl: window.location.origin,
-      method: 'post',
+      method: 'get',
       methods: [
         {
-          text: 'POST (with a JSON body)',
-          value: 'post'
+          text: 'GET - Query string parameters',
+          value: 'get'
         },
         {
-          text: 'GET (with query string parameters)',
-          value: 'get'
+          text: 'POST - JSON formatted parameters in the request body',
+          value: 'post'
         }
       ]
     }
@@ -83,8 +107,45 @@ export default {
   watch: {
   },
   computed: {
-    queryParameters () {
-      let parametersStrings = []
+    baseUrl () {
+      if (this.settings && this.settings['generator-base-url']) {
+        return this.settings['generator-base-url'].replace(/\/$/, '')
+      } else {
+        return window.location.origin
+      }
+    },
+    curlCommand () {
+      if (this.method === 'get') {
+        return `curl "${this.notificationUrl}"`
+      } else {
+        return `curl -H "Content-Type: application/json" -X POST -d '${this.jsonParameters}' "${this.notificationUrl}"`
+      }
+    },
+    errors () {
+      let errors = []
+      if (!this.apiKey) {
+        errors.push('You have to select an API key. If you don\'t have any API key yet, you have to create one in the API Keys section.')
+      }
+      if (!this.content) {
+        errors.push('You have to write the content of the notification')
+      }
+      return errors
+    },
+    formattedJsonParameters () {
+      let parameters = {}
+      this.parameters.forEach((parameter) => {
+        parameters[parameter.key] = parameter.value
+      })
+      return JSON.stringify(parameters, null, 2)
+    },
+    jsonParameters () {
+      let parameters = {}
+      this.parameters.forEach((parameter) => {
+        parameters[parameter.key] = parameter.value
+      })
+      return JSON.stringify(parameters)
+    },
+    parameters () {
       let parameters = []
       if (this.apiKey) {
         parameters.push({key: 'api_key', value: this.apiKey})
@@ -95,6 +156,11 @@ export default {
       if (this.language) {
         parameters.push({key: 'lang', value: this.language})
       }
+      return parameters
+    },
+    queryParameters () {
+      let parametersStrings = []
+      let parameters = this.parameters
       if (parameters.length > 0) {
         parameters.forEach((parameter) => {
           parametersStrings.push(`${parameter.key}=${encodeURI(parameter.value)}`)
@@ -148,6 +214,24 @@ export default {
 </script>
 
 <style lang="scss">
+.instructions-alert {
+  margin-bottom: 20px;
+}
 
+code[class*="language-"] {
+    &::before {
+      content: none
+    }
+}
 
+pre[class*="language-"] {
+  border: none;
+  margin-bottom: 20px;
+}
+
+code[class*="language-"]  {
+  box-shadow: none;
+
+  background: none;
+}
 </style>

@@ -17,18 +17,28 @@
         <v-flex  xs12>
           <v-card>
             <v-card-text v-if="settingsToEdit">
+              <h2>Admin password</h2>
               <v-text-field
                 label="Change admin password"
                 type="password"
                 :error-messages="validator.getErrorsText('admin-password')"
                 v-model="settingsToEdit['admin-password']"
               ></v-text-field>
+              <h2>Default voice language</h2>
+              <p>This is the language of the voice used when the <code>lang</code> parameter is not sent in the request.</p>
               <v-select
                 :items="languages"
                 :error-messages="validator.getErrorsText('default-language')"
                 v-model="settingsToEdit['default-language']"
                 label="Default voice language"
               ></v-select>
+              <h2>Change the generator base URL</h2>
+              <p>The generator base URL is used to generate correct URLs in the "Generate Notification" section. it's very usefull if you use the NAT port forwarding of your router/box.</p>
+              <v-text-field
+                :error-messages="validator.getErrorsText('generator-base-url')"
+                v-model="settingsToEdit['generator-base-url']"
+                label="Generator base url "
+              ></v-text-field>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn :loading="waiting.updateSettings" color="green" flat @click.native="update()">Save</v-btn>
