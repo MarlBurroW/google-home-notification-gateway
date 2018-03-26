@@ -19,8 +19,18 @@
         <v-flex  xs12 md4 lg4 v-for="device in devices" :key="device.id">
           <device-card :device="device"></device-card>   
         </v-flex>
+       
       </v-layout>
+     
+      
     </v-scale-transition>
+  
+    <v-layout  justify-center align-center v-if="devices.length < 1">
+      <v-flex shrink>
+        <div class="no-content">Click on <v-icon>mdi-plus</v-icon> to add a device</div>
+      </v-flex>
+    </v-layout>
+     
  </v-container>
  
 </template>

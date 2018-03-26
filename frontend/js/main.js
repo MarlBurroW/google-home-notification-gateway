@@ -21,7 +21,7 @@ import Layout from './vue/screens/Layout.vue'
 import Devices from './vue/screens/Devices.vue'
 import Settings from './vue/screens/Settings.vue'
 import ApiKeys from './vue/screens/ApiKeys.vue'
-import GenerateNotification from './vue/screens/GenerateNotification.vue'
+import HowTo from './vue/screens/HowTo.vue'
 import Localtunnel from './vue/screens/Localtunnel.vue'
 
 // UI Elements
@@ -38,7 +38,7 @@ Vue.component('layout', Layout)
 Vue.component('devices', Devices)
 Vue.component('settings', Settings)
 Vue.component('apikeys', ApiKeys)
-Vue.component('generate-notification', GenerateNotification)
+Vue.component('how-to', HowTo)
 Vue.component('localtunnel', Localtunnel)
 
 Vue.component('device-card', DeviceCard)
@@ -61,7 +61,7 @@ const routes = [
   {path: '/devices', name: 'devices', component: Devices},
   {path: '/settings', name: 'settings', component: Settings},
   {path: '/apikeys', name: 'apikeys', component: ApiKeys},
-  {path: '/generate-notification', name: 'generate-notification', component: GenerateNotification},
+  {path: '/generate-notification', name: 'generate-notification', component: HowTo},
   {path: '/localtunnel', name: 'localtunnel', component: Localtunnel},
   { path: '*', redirect: '/generate-notification' }
 ]

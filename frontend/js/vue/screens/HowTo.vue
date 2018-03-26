@@ -3,16 +3,26 @@
  <v-container grid-list-md fluid>
    <v-layout row wrap >
       <v-toolbar  style="margin-bottom: 30px;">
-        <v-toolbar-title>Generate Notification</v-toolbar-title>
+        <v-toolbar-title>How to send a notification to Google Home Notification Gateway</v-toolbar-title>
         <v-spacer></v-spacer>
       </v-toolbar>
-    </v-layout>
+     
+    </v-layout> 
+    <v-alert type="info" :value="true">
+        Google Home Notification Gateway (GHNG) is an administrable API allowing your Google devices to receive voice notification from anything able to send HTTP request. <br />
+        It works very well with <a href="https://ifttt.com/discover">IFTTT</a>, you can create some automations (applets) that triggers voice notifications on your devices. <br />
+        If you have some coding skills, it's very easy to send notification to GHNG from your scripts, you just need to be able to send HTTP Request. <br />
+        The API is protected by a simple API key system, you must create an API key for each source.
+    </v-alert>
+    
     <v-scale-transition>
+    
      <v-layout row wrap>
+       
         <v-flex  xs12 md5>
           <v-card>
             <v-card-text>
-              <h1>Compose the request</h1>
+              <h1>How to compose the request</h1>
               <v-alert v-if="errors.length > 0" type="error" :value="true" class="instructions-alert">
                 <div v-for="error in errors">• {{error}}</div>
               </v-alert>
@@ -42,10 +52,6 @@
                 multi-line
                 no-resize
               ></v-text-field>
-
-             
-             
-                        
             </v-card-text>
             
           </v-card>
@@ -56,16 +62,19 @@
               <h1>How to send the request</h1>
               <p v-if="method === 'get'">Call the url below with a simple <code color="success">GET</code> method to trigger the notification:</p>
               <p v-if="method === 'post'">To trigger the notification with the <code color="success">POST</code> method, you have to call the below url with the <code>POST</code> method and add the <code>Content-Type</code> header with the value <code>application/json</code></p>
-          
+
               <prism language="bash">{{notificationUrl}}</prism>
+              <p v-if="isLocaltunnelRunning">Or trougth the Localtunnel</p>
+              <prism v-if="isLocaltunnelRunning" language="bash">{{localtunnelNotificationUrl}}</prism>
               <p v-if="method === 'post'">All parameters must be located in the request body with the following JSON content:</p>
               <prism v-if="method === 'post'" language="json">{{this.formattedJsonParameters}}</prism>
-             
+
+
               <h2>Test with cURL</h2>
               <p>You can test the notification with the following cURL command</p>
               <prism language="bash">{{curlCommand}}</prism>
-
-
+              <p v-if="isLocaltunnelRunning">Or througth the Localtunnel</p>
+              <prism v-if="isLocaltunnelRunning" language="bash">{{localtunnelCurlCommand}}</prism>
             </v-card-text>
           </v-card>
          </v-flex>
@@ -114,6 +123,16 @@ export default {
         return window.location.origin
       }
     },
+    localtunnelBaseUrl () {
+      return this.localtunnel.url.replace(/\/$/, '')
+    },
+    localtunnelCurlCommand () {
+      if (this.method === 'get') {
+        return `curl "${this.localtunnelNotificationUrl}"`
+      } else {
+        return `curl -H "Content-Type: application/json" -X POST -d '${this.jsonParameters}' "${this.localtunnelNotificationUrl}"`
+      }
+    },
     curlCommand () {
       if (this.method === 'get') {
         return `curl "${this.notificationUrl}"`
@@ -128,6 +147,9 @@ export default {
       }
       if (!this.content) {
         errors.push('You have to write the content of the notification')
+      }
+      if (this.devices.length < 1) {
+        errors.push('You do not have any devices registered yet, add at least one device in the Devices section.')
       }
       return errors
     },
@@ -170,6 +192,9 @@ export default {
         return ''
       }
     },
+    localtunnelNotificationUrl () {
+      return `${this.localtunnelBaseUrl}/api/devices${this.UrlDevicePart}/notifications${this.method === 'get' ? this.queryParameters : ''}`
+    },
     notificationUrl () {
       return `${this.baseUrl}/api/devices${this.UrlDevicePart}/notifications${this.method === 'get' ? this.queryParameters : ''}`
     },
@@ -179,6 +204,9 @@ export default {
       } else {
         return `/${this.device}`
       }
+    },
+    isLocaltunnelRunning () {
+      return this.localtunnel.status === 'running'
     },
     devicesSelectItems () {
       let items = []
@@ -197,6 +225,9 @@ export default {
     },
     ...mapGetters('settings', [
       'settings'
+    ]),
+    ...mapGetters('localtunnel', [
+      'localtunnel'
     ]),
     ...mapGetters('devices', [
       'devices'

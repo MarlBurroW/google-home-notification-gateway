@@ -9,10 +9,10 @@
       <v-list dense>
         <v-list-tile  to="generate-notification">
           <v-list-tile-action>
-            <v-icon>mdi-bell-ring</v-icon>
+            <v-icon>info</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>Generate Notification</v-list-tile-title>
+            <v-list-tile-title>How to use</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile to="devices">
@@ -60,7 +60,7 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Google Notification Center</v-toolbar-title>
+      <v-toolbar-title>Google Home Notification Gateway</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-container fluid>

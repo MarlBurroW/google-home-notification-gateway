@@ -19,7 +19,13 @@
           <apikey-card :api-key="apiKey"></apikey-card>   
         </v-flex>
       </v-layout>
+  
     </v-scale-transition>
+    <v-layout  justify-center align-center v-if="apiKeys.length < 1">
+      <v-flex shrink>
+        <div class="no-content">Click on <v-icon>mdi-plus</v-icon> to add an API key</div>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 

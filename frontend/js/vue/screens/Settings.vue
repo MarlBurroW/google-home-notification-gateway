@@ -39,6 +39,13 @@
                 v-model="settingsToEdit['generator-base-url']"
                 label="Generator base url "
               ></v-text-field>
+              <h2>Localtunnel Domain</h2>
+              <p>The domain that will be used when your start the localtunnel</p>
+              <v-text-field
+                :error-messages="validator.getErrorsText('localtunnel-domain')"
+                v-model="settingsToEdit['localtunnel-domain']"
+                label="Localtunnel Domain "
+              ></v-text-field>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn :loading="waiting.updateSettings" color="green" flat @click.native="update()">Save</v-btn>
