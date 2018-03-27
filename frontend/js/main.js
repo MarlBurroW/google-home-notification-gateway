@@ -63,7 +63,7 @@ const routes = [
   {path: '/apikeys', name: 'apikeys', component: ApiKeys},
   {path: '/generate-notification', name: 'generate-notification', component: HowTo},
   {path: '/localtunnel', name: 'localtunnel', component: Localtunnel},
-  { path: '*', redirect: '/generate-notification' }
+  { path: '*', redirect: '/devices' }
 ]
 
 const router = new VueRouter({

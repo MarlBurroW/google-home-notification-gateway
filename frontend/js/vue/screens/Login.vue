@@ -1,26 +1,29 @@
 <template>
     <div>
       <v-dialog persistent v-model="loginDialog" max-width="500px">
-        <v-card>
-          <v-card-title>
-            <span class="headline">Administration</span>
-          </v-card-title>
-          <v-card-text>
-            <v-text-field
-            label="Admin password"
-            v-model="password"
-            required
-            type="password"
-            :loading="waiting.login"
-            ></v-text-field>
-                  
-          </v-card-text>
-          <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn :loading="waiting.login" @click="logIn()" round color="primary" >Login</v-btn>
-          <v-spacer></v-spacer>
-          </v-card-actions>
-        </v-card>
+        <v-form @submit="logIn()">
+          <v-card>
+            <v-card-title>
+              <span class="headline">Administration</span>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field
+              label="Admin password"
+              v-model="password"
+              required
+              type="password"
+              :loading="waiting.login"
+              ></v-text-field>
+                    
+            </v-card-text>
+            <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn :loading="waiting.login" type="submit" round color="primary" >Login</v-btn>
+            <v-spacer></v-spacer>
+            </v-card-actions>
+          </v-card>
+        </v-form>
+        
       </v-dialog>
     </div>
 </template>
@@ -33,12 +36,11 @@ export default {
   data () {
     return {
       loginDialog: true,
-      password: '!adminpassword!'
+      password: ''
     }
   },
   computed: {
     ...mapGetters('global', [
-      'loggedIn',
       'waiting'
     ])
   },

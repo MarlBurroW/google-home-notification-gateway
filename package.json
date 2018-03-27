@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NODE_PORT=3020 WEBPACKDEVSERVER_PORT=3010 BROWSERSYNC_PORT=3000 node start-dev.js",
     "build": "cross-env NODE_ENV=production webpack",
-    "start": "cross-env NODE_ENV=production NODE_PORT=3000 webpack && node start.js"
+    "start": "cross-env NODE_ENV=production NODE_PORT=3000 node start.js"
   },
   "author": "Nicolas VARROT (MarlburroW)",
   "license": "ISC",
