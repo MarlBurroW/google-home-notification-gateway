@@ -33,7 +33,7 @@ Below a diagram showing how GHNG works. The application must be installed on a h
 First, you need NodeJS installed on the target host (v8.6.0 or higher). If this is not the case, go to the [NodeJS website](https://nodejs.org/en/) to download the version corresponding to your platform.
 ### 1. Clone the repository 
 
-`$ git clone `https://github.com/MarlBurroW/google-home-notification-gateway
+`$ git clone https://github.com/MarlBurroW/google-home-notification-gateway`
 
 
 ### 2. Install dependencies with NPM
