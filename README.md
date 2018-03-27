@@ -1,6 +1,6 @@
 # Google Home Notification Gateway
 
-![img](https://www.screencast.com/t/NSkwJytILfHU)
+![img](https://content.screencast.com/users/marlburrow/folders/Snagit/media/da213002-2fe9-40d3-a31c-edd5af85a64c/2018-03-27_21-48-59.png)
 
 Google Home Notification Gateway (GHNG) is an administrable API allowing your Google devices to receive voice notifications from anything able to send very basics HTTP requests.
 
