@@ -100,8 +100,9 @@ If you want to send a request from a IFTTT Applet to GHNG, you must use the **We
 To know how compose the request, go to the section **How to use** in the GHNG Administration panel.
 
 
-## Network and Localtunnel
+## Network & Localtunnel
 
+Coming soon
 ## Development
 
 Coming soon
