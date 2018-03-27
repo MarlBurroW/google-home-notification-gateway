@@ -1,10 +1,10 @@
 <template>
-    <v-dialog v-model="open" max-width="500px">
+    <v-dialog scrollable v-model="open" max-width="500px">
         <v-card>
-          <v-card-media v-if="device" class="model-image"  height="300px" :src="modelPicture">
+          <v-card-media v-if="device" class="model-image"  height="200px" :src="modelPicture">
           </v-card-media>
         
-          <v-card-text style="height: 300px;">
+          <v-card-text >
             <div v-if="device">
               <v-text-field
                 :append-icon="checkingHost ? '' : (hostOnline ? 'check' : 'close')"

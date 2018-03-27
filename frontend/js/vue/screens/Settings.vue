@@ -24,6 +24,7 @@
                 :error-messages="validator.getErrorsText('admin-password')"
                 v-model="settingsToEdit['admin-password']"
               ></v-text-field>
+              
               <h2>Default voice language</h2>
               <p>This is the language of the voice used when the <code>lang</code> parameter is not sent in the request.</p>
               <v-select
@@ -46,6 +47,7 @@
                 v-model="settingsToEdit['localtunnel-domain']"
                 label="Localtunnel Domain "
               ></v-text-field>
+              
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn :loading="waiting.updateSettings" color="green" flat @click.native="update()">Save</v-btn>

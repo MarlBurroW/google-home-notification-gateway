@@ -8,21 +8,16 @@
       </v-toolbar>
      
     </v-layout> 
-    <v-alert type="info" :value="true">
-        Google Home Notification Gateway (GHNG) is an administrable API allowing your Google devices to receive voice notification from anything able to send HTTP request. <br />
-        It works very well with <a href="https://ifttt.com/discover">IFTTT</a>, you can create some automations (applets) that triggers voice notifications on your devices. <br />
-        If you have some coding skills, it's very easy to send notification to GHNG from your scripts, you just need to be able to send HTTP Request. <br />
-        The API is protected by a simple API key system, you must create an API key for each source.
-    </v-alert>
+
     
     <v-scale-transition>
     
      <v-layout row wrap>
        
-        <v-flex  xs12 md5>
+        <v-flex  xs12 xl5>
           <v-card>
             <v-card-text>
-              <h1>How to compose the request</h1>
+              <h1>1. Compose the request</h1>
               <v-alert v-if="errors.length > 0" type="error" :value="true" class="instructions-alert">
                 <div v-for="error in errors">• {{error}}</div>
               </v-alert>
@@ -56,10 +51,10 @@
             
           </v-card>
         </v-flex>
-         <v-flex  xs12 md7>
+         <v-flex  xs12 xl7>
           <v-card>
             <v-card-text>
-              <h1>How to send the request</h1>
+              <h1>2. Send the request</h1>
               <p v-if="method === 'get'">Call the url below with a simple <code color="success">GET</code> method to trigger the notification:</p>
               <p v-if="method === 'post'">To trigger the notification with the <code color="success">POST</code> method, you have to call the below url with the <code>POST</code> method and add the <code>Content-Type</code> header with the value <code>application/json</code></p>
 
