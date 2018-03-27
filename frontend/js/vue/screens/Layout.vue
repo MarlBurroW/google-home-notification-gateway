@@ -33,7 +33,7 @@
         </v-list-tile>
         <v-list-tile to="localtunnel">
           <v-list-tile-action>
-            <v-icon>mdi-key</v-icon>
+            <v-icon>mdi-upload-network</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>Localtunnel</v-list-tile-title>
