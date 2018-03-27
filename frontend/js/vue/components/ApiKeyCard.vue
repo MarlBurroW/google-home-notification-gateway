@@ -4,6 +4,9 @@
         <div>
             <h3 class="headline mb-0"><v-icon>mdi-key</v-icon> {{apiKey.app_name}}</h3>
             <div>Used {{apiKey.counter}} time(s)</div>
+
+          
+
             <div>Latest use: <span v-if="apiKey.latest_use">{{apiKey.latest_use |  moment("from", "now")}}</span><span v-else>Never</span></div>
         </div>
         </v-card-title>

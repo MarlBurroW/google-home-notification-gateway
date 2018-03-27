@@ -32,8 +32,8 @@
                 v-model="settingsToEdit['default-language']"
                 label="Default voice language"
               ></v-select>
-              <h2>Change the generator base URL</h2>
-              <p>The generator base URL is used to generate correct URLs in the "Generate Notification" section. it's very usefull if you use the NAT port forwarding of your router/box.</p>
+              <h2>Change the base URL</h2>
+              <p>The base URL is used in the "How to use" section to generate correct URLs. It's very usefull if you want to generate URLs with your router WAN IP address or domain. If you let this field empty, the base url used will be the browser one ({{baseUrl}}).</p>
               <v-text-field
                 :error-messages="validator.getErrorsText('generator-base-url')"
                 v-model="settingsToEdit['generator-base-url']"
@@ -85,12 +85,16 @@ export default {
     }
   },
   computed: {
+    baseUrl () {
+      return window.location.origin
+    },
     ...mapGetters('settings', [
       'settings',
       'waiting'
     ])
   },
   methods: {
+
     ...mapActions('settings', [
       'getSettings',
       'updateSettings'
