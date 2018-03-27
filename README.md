@@ -37,6 +37,7 @@ First, you need NodeJS installed on the target host (v8.6.0 or higher). If this 
 
 
 ### 2. Install dependencies with NPM
+
 `$ cd google-home-notification-gateway`
 `$ npm install`
 
