@@ -3,6 +3,7 @@
 import {create} from 'apisauce'
 import Promise from 'bluebird'
 import events from 'events'
+import ApiError from '../classes/ApiError'
 
 // Create an APISAUCE instance
 const APISauceInstance = create({
@@ -37,13 +38,16 @@ const mockDelayMax = 3000
 function processResponse (response) {
   let promise = new Promise((resolve, reject) => {
     if (response.ok === false) {
-      console.error(response.problem)
+      // if (debug) {
+      //   console.error(response.problem)
+      // }
 
       if (response.status === 403) {
         eventEmitter.emit('wrongToken')
       }
-
-      reject(response)
+      let test = new ApiError(response)
+      console.error(test.getResponse())
+      reject(test)
     } else {
       if (response.status === 204) {
         resolve()

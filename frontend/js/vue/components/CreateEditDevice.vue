@@ -169,10 +169,10 @@ export default {
         this.validator.reset()
         this.open = false
         this.showMessage({text: 'Device created', color: 'success'})
-      }).catch((response) => {
+      }).catch((apiError) => {
         this.showMessage({text: 'Error while creating the device', color: 'error'})
-        if (response.status === 422) {
-          this.validator.setErrorsFromResponse(response)
+        if (apiError.isValidationError()) {
+          this.validator.setErrorsFromResponse(apiError.getResponse())
         }
       })
     },
