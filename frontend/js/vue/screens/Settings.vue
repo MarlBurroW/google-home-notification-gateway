@@ -28,6 +28,7 @@
               <h2>Default voice language</h2>
               <p>This is the language of the voice used when the <code>lang</code> parameter is not sent in the request.</p>
               <v-select
+                dense
                 :items="languages"
                 :error-messages="validator.getErrorsText('default-language')"
                 v-model="settingsToEdit['default-language']"

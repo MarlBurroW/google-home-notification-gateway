@@ -25,6 +25,7 @@
                 label="Identifier"
               ></v-text-field>
               <v-select
+                dense
                 :error-messages="validator.getErrorsText('model')"
                 :items="modelList"
                 v-model="device.model"

@@ -22,21 +22,25 @@
                 <div v-for="error in errors">• {{error}}</div>
               </v-alert>
               <v-select
+                dense
                 :items="devicesSelectItems"
                 v-model="device"
                 label="Google device to use"
               ></v-select>
               <v-select
+                dense
                 :items="apiKeysSelectItems"
                 v-model="apiKey"
                 label="API key to use"
               ></v-select>
               <v-select
+                dense
                 :items="languages"
                 v-model="language"
                 label="Voice language to use"
               ></v-select>
               <v-select
+                dense
                 :items="methods"
                 v-model="method"
                 label="Method"

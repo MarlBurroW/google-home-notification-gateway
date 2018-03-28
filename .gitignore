@@ -3,3 +3,4 @@ node_modules
 backend/storage/database.sqlite
 public
 package-lock.json
+backend/secret

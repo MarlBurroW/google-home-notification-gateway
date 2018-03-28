@@ -6,10 +6,11 @@
           </v-card-title>
           <v-card-text >
             <v-select
+              dense
               :items="languages"
               v-model="lang"
               label="Voice language"
-             
+              dense
             ></v-select>
              <v-text-field
               label="Text to speak"
