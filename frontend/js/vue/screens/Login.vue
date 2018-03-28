@@ -48,8 +48,12 @@ export default {
     logIn () {
       this.login(this.password).then(() => {
         this.showMessage({text: 'Logged In', color: 'success'})
-      }).catch((response) => {
-        this.showMessage({text: response.data.message, color: 'error'})
+      }).catch((apiError) => {
+        if (apiError.isUnauthorized) {
+          this.showMessage({text: 'Wrong password', color: 'error'})
+        } else {
+          this.showMessage({text: apiError.message, color: 'error'})
+        }
       })
     },
     ...mapActions('global', [
