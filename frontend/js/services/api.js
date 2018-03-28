@@ -38,16 +38,15 @@ const mockDelayMax = 3000
 function processResponse (response) {
   let promise = new Promise((resolve, reject) => {
     if (response.ok === false) {
-      // if (debug) {
-      //   console.error(response.problem)
-      // }
+      if (debug) {
+        console.error(response.problem)
+      }
 
       if (response.status === 403) {
         eventEmitter.emit('wrongToken')
       }
-      let test = new ApiError(response)
-      console.error(test.getResponse())
-      reject(test)
+
+      reject(new ApiError(response))
     } else {
       if (response.status === 204) {
         resolve()

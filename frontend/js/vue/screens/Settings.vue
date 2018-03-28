@@ -108,10 +108,10 @@ export default {
       this.updateSettings(this.settingsToEdit).then(() => {
         this.validator.reset()
         this.showMessage({text: 'Settings saved', color: 'success'})
-      }).catch((response) => {
+      }).catch((apiError) => {
         this.showMessage({text: 'Error while saving settings', color: 'error'})
-        if (response.status === 422) {
-          this.validator.setErrorsFromResponse(response)
+        if (apiError.isValidationError) {
+          this.validator.setErrorsFromResponse(apiError.response)
         }
       })
     }

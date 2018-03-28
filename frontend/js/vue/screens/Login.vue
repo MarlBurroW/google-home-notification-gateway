@@ -36,7 +36,7 @@ export default {
   data () {
     return {
       loginDialog: true,
-      password: '!adminpassword!'
+      password: ''
     }
   },
   computed: {

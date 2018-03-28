@@ -42,7 +42,7 @@
                 label="Method"
               ></v-select>
               <v-text-field
-                label="Content"
+                label="Content (Text to speak)"
                 v-model="content"
                 multi-line
                 no-resize

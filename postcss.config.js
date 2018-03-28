@@ -8,8 +8,10 @@ let config = {
   }
 }
 
-if(!dev) {
-  config.plugins.cssnano = {}
+if (!dev) {
+  config.plugins.cssnano = {
+    reduceIdents: false
+  }
 }
 
 module.exports = config

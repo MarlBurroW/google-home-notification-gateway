@@ -118,10 +118,10 @@ export default {
         this.validator.reset()
         this.open = false
         this.showMessage({text: 'API key created', color: 'success'})
-      }).catch((response) => {
+      }).catch((apiError) => {
         this.showMessage({text: 'Error while creating the API key', color: 'error'})
-        if (response.status === 422) {
-          this.validator.setErrorsFromResponse(response)
+        if (apiError.isValidationError) {
+          this.validator.setErrorsFromResponse(apiError.response)
         }
       })
     },
@@ -139,10 +139,10 @@ export default {
         this.validator.reset()
         this.open = false
         this.showMessage({text: 'API key saved', color: 'success'})
-      }).catch((response) => {
+      }).catch((apiError) => {
         this.showMessage({text: 'Error while saving the API key', color: 'error'})
-        if (response.status === 422) {
-          this.validator.setErrorsFromResponse(response)
+        if (apiError.isValidationError) {
+          this.validator.setErrorsFromResponse(apiError.response)
         }
       })
     }

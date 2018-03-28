@@ -19,7 +19,6 @@
           <apikey-card :api-key="apiKey"></apikey-card>   
         </v-flex>
       </v-layout>
-  
     </v-scale-transition>
     <v-layout  justify-center align-center v-if="apiKeys.length < 1">
       <v-flex shrink>
