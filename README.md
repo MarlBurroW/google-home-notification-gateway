@@ -12,7 +12,9 @@ Here a simple example of IFTTT and GHNG working together:
 >**IF** My favorite Twitch streamer is going live **THEN** Send a HTTP request to GHDG to say "Your favorite Twitch streamer is going live" on all your devices.
 
 If you have some coding skills, it's very easy to send notification to GHNG from any scripting language, you just need to be able to send HTTP Request.
-    
+
+Important: Currently, the app works fine on MacOSX but there is a lot of dependencies issues that I have to fix on Windows and Linux.
+ 
 ## Features
 - Receive voice notifications to a single device, or all your devices.
 - Support multiple voice languages that can be specified in the request.
