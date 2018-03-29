@@ -1,6 +1,5 @@
 node_modules
 .DS_Store
 backend/storage/database.sqlite
-public
 package-lock.json
 backend/secret
