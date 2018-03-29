@@ -29,9 +29,10 @@ As show above, GHNG can receive HTTP requests that trigger voice notifications o
 If you want GHND to receives HTTP request from outside your local network (E.g. IFTTT), you need to configure a NAT rule on your router/box.
 
 ## Requirements
-- Nodejs (v8.6.0 or higher)
-- NPM (v5.6.0 or higher)
-- Git
+- Nodejs (v8.6.0 or higher) - To run the app
+- NPM (v5.6.0 or higher) - To install NodeJS dependencies
+- Git - To clone the repository
+- Build tools - To build native modules (see how to install build tools for your plateform here https://github.com/nodejs/node-gyp)
 
 ## Installation
 First, you need NodeJS installed on the target host (v8.6.0 or higher). If this is not the case, go to the [NodeJS website](https://nodejs.org/en/) to download the version corresponding to your platform.
@@ -47,6 +48,8 @@ First, you need NodeJS installed on the target host (v8.6.0 or higher). If this 
 `$ npm install`
 
 This step can take a while depending on the speed of your connection and your machine.
+
+If this step fails with a `node-gyp` related error, go to [node-gyp](`https://github.com/nodejs/node-gyp`) and follow the instructions for your plateform.
 
 ### 2. Build the frontend
 The frontend part of the project is not commited on the git repository, so you have to build it yourself with this command.
