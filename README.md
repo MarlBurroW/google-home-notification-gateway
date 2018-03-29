@@ -51,14 +51,8 @@ This step can take a while depending on the speed of your connection and your ma
 
 If this step fails with a `node-gyp` related error, go to [node-gyp](`https://github.com/nodejs/node-gyp`) and follow the instructions for your plateform.
 
-### 2. Build the frontend
-The frontend part of the project is not commited on the git repository, so you have to build it yourself with this command.
+### 2. Run GHNG
 
-`$ npm run build`
-
-This step can take a while.
-
-### 3. Run GHNG
 Now, you can run the application witth the following command.
 
 `$ npm start`
@@ -67,7 +61,7 @@ The web administration interface is listening by default on the port 3000.
 
 The above command is good for running GHNG for test purposes, but for a real usecase, read the next step.
 
-### 4. Run GHNG with forever
+### 3. Run GHNG with forever
 
 You probably want to start GHND as a deamon, [Forever](https://github.com/foreverjs/forever) is very good for this.
 
