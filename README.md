@@ -31,19 +31,37 @@ As show above, GHNG can receive HTTP requests that trigger voice notifications o
 If you want GHND to receives HTTP request from outside your local network (E.g. IFTTT), you need to configure a NAT rule on your router/box.
 
 ## Requirements
+
+- Docker
+
+### OR
+
 - Nodejs (v8.6.0 or higher) - To run the app
 - NPM (v5.6.0 or higher) - To install NodeJS dependencies
 - Git - To clone the repository
 - Build tools - To build native modules (see how to install build tools for your plateform here https://github.com/nodejs/node-gyp)
 
 ## Installation
+
+### With Docker
+
+I've created a Docker Hub repository here: https://hub.docker.com/r/marlburrow/ghng/
+
+Pull the image `marlburrow/ghng` on your favorite Docker host.
+
+- Volume to mount on your host: `/usr/src/app/backend/storage`
+- Private port to map on your host: `3000`
+
+
+### Without Docker
+
 First, you need NodeJS installed on the target host (v8.6.0 or higher). If this is not the case, go to the [NodeJS website](https://nodejs.org/en/) to download the version corresponding to your platform.
-### 1. Clone the repository 
+#### 1. Clone the repository 
 
 `$ git clone https://github.com/MarlBurroW/google-home-notification-gateway`
 
 
-### 2. Install dependencies with NPM
+#### 2. Install dependencies with NPM
 
 `$ cd google-home-notification-gateway`
 
@@ -53,7 +71,7 @@ This step can take a while depending on the speed of your connection and your ma
 
 If this step fails with a `node-gyp` related error, go to [node-gyp](`https://github.com/nodejs/node-gyp`) and follow the instructions for your plateform.
 
-### 2. Run GHNG
+#### 2. Run GHNG
 
 Now, you can run the application witth the following command.
 
@@ -63,7 +81,7 @@ The web administration interface is listening by default on the port 3000.
 
 The above command is good for running GHNG for test purposes, but for a real usecase, read the next step.
 
-### 3. Run GHNG with forever
+#### 3. Run GHNG with forever
 
 You probably want to start GHND as a deamon, [Forever](https://github.com/foreverjs/forever) is very good for this.
 
