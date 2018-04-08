@@ -49,7 +49,6 @@ I've created a Docker Hub repository here: https://hub.docker.com/r/marlburrow/g
 
 Pull the image `marlburrow/ghng` on your favorite Docker host.
 
-- Volume to mount on your host: `/usr/src/app/backend/storage`
 - Private port to map on your host: `3000`
 
 
