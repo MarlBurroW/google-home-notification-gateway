@@ -1,7 +1,7 @@
 <template>
     <div>
       <v-dialog persistent v-model="loginDialog" max-width="500px">
-        <v-form @submit="logIn()">
+        <v-form @submit.prevent="logIn()">
           <v-card>
             <v-card-title>
               <span class="headline">Administration</span>

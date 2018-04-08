@@ -1,7 +1,7 @@
 const fs = require('fs')
 const helpers = require('./helpers/helpers')
 
-const secretFilePath = './backend/secret'
+const secretFilePath = './backend/storage/secret'
 let secret = null
 
 if (fs.existsSync(secretFilePath)) {
@@ -14,5 +14,5 @@ if (fs.existsSync(secretFilePath)) {
 module.exports = {
   getSecret () {
     return secret
-  }   
+  }
 }
