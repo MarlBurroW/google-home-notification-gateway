@@ -55,7 +55,8 @@ Pull the image `marlburrow/ghng` on your favorite Docker host.
 ### Without Docker
 
 - [Install on OSX](https://github.com/MarlBurroW/google-home-notification-gateway/blob/master/install-on-osx.md)
-- [Install on Windows](https://github.com/MarlBurroW/google-home-notification-gateway/blob/master/install-on-windows.md)
+- Install on Windows (Work in progress)
+- Install on Linux (Work in progress)
 
 ## Usage
 
